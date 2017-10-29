@@ -1,0 +1,23 @@
+{% extends "crawler_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    关键词列表
+</h1>
+    <a href="{% url 'keyword-add'  %}"> 添加新词</a>
+    <ul>
+        {% for k in object_list %}
+            <li>
+                <a href="{% url 'keyword-delete' pk=k.pk %}">
+                    {{ k }}
+                </a>
+            </li>
+        {% endfor %}
+</ul>
+
+
+{% endblock %}

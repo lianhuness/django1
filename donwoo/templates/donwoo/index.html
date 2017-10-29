@@ -1,0 +1,48 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Welcome to DonwooSports!
+</h1>
+
+
+
+
+    <h2> 产品类别组 </h2>
+    <table class="table table-stripped">
+
+        <tr>
+            <th> 类别名称</th>
+            <th> SKU 明细 </th>
+        </tr>
+            {% for sg in skugroups %}
+                <tr>
+                <th>
+                    <a href="{% url 'view_skugroup' pk=sg.id %}">
+                    {{ sg }}
+                    </a>   # {{  sg.sku_set.count }}
+                </th>
+
+                <td>
+                    <table class="table table-striped">
+
+                        {% for sku in sg.sku_set.all %}
+                            <tr> <td>
+                            {% include "sku_template.html" with sku=sku %}
+                            </td></tr>
+
+
+                        {% endfor %}
+                 </table>
+                </td>
+
+                </tr>
+            {% endfor %}
+
+
+    </table>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>客户： {{ client.name }}</h1>
+    <table class="table">
+        <tr>
+            <th>国家</th> <td> {{ client.country }}</td>
+        </tr>
+        <tr>
+            <th>地区</th> <td> {{ client.district }}</td>
+        </tr>
+         <tr>
+            <th>建立日期</th> <td> {{ client.created_date }}</td>
+        </tr>
+         <tr>
+            <th>最近更改日期</th> <td> {{ client.updated_date }}</td>
+        </tr>
+        <tr>
+            <th>销售代表</th> <td> {{ client.sales }}</td>
+        </tr>
+
+        <tr>
+            <td> <a href={% url 'edit_client' id=client.id %}> 修改客户信息 </a></td>
+        </tr>
+
+    </table>
+
+    <div>
+        <h2> SKU 列表</h2>
+        <ul>
+            {% for sku in client.sku_set.all %}
+                <li> <a url="{% url 'view_sku' id=sku.id %}"> {{ sku }}</a></li>
+            {%  endfor %}
+        </ul>
+
+    <ul>
+        <li> <a href="{% url 'add_sku' cid=client.id %}"> 添加 SKU</a> </li>
+        <li> <a href="{% url 'add_contract' cid=client.id %}"> 添加新合同</a> </li>
+    </ul>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    产品列表
+</h1>
+
+        <ul class="nav nav-tabs">
+            {% for tc in typeCounts %}
+                <li class="{{ tc.is_active }}"> <a href={% url 'list_products_type' product_type=tc.type %}> {{ tc.type_display }}: {{ tc.id__count }} </a> </li>
+            {% endfor %}
+        </ul>
+
+
+    <table class="table">
+        <tr>
+            <th> 产品 </th>
+            <th> 使用的SKU </th>
+
+        </tr>
+
+    {% for p in object_list %}
+            <tr>
+                <td>
+                <a href="{% url 'view_product' id=p.id %}" >
+                {{  p }}
+                </a>
+
+                    <a href="{% url 'delete_product' id=p.id %}?next={% url 'list_products_type' product_type=product_type %}">
+                        删除
+                    </a>
+                </td>
+
+                <td>
+                    <ul>
+                    {% for si in p.skuitem_set.all %}
+                            <li>
+                            <a href="{% url 'view_sku' id=si.sku.pk %}" >
+                                {{  si.sku  }}
+                            </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+{% endblock %}

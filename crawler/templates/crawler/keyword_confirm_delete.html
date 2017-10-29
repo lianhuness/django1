@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    <!-- 主题内容-->
+</h1>
+
+    <form action="" method="post">{% csrf_token %}
+<p> 确定要删除 "{{ object }}"?</p>
+<input type="submit" value="Confirm" />
+</form>
+{% endblock %}

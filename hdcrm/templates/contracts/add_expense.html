@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+<h1>
+    添加收入支出 - {{ contract }}
+</h1>
+
+     <form action="{% url 'add_expense' cid=contract.id %}" method="POST"  enctype="multipart/form-data" >
+        <table class="table">
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit"/>
+     </form>
+{% endblock %}

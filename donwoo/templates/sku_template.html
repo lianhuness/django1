@@ -1,0 +1,15 @@
+{% load static %}
+
+<a href="{%  url 'dw_view_sku' pk=sku.id  %}">
+    <h2> {{ sku }} </h2>
+</a>  - {{ sku.created_date }}
+<li> {{ sku.skuGroup  }}</li>
+<li> {% for fc in sku.fileCounts %}
+        {{ fc.filetype }}: {{ fc.filetype__count }},
+    {% endfor %}
+</li>
+
+<li>{{sku.description }}  </li>
+{% for img in sku.imagesTop3 %}
+    <img height=100 src="{{ img.file.url }}" />
+{% endfor %}

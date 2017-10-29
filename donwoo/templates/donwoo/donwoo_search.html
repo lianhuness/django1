@@ -1,0 +1,31 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    搜索 - {{ search_type }}
+</h1>
+
+    <form action={% url 'donwoo_search' search_type=search_type %} method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+
+    {% if objs|length > 0 %}
+        <h2> 搜索结果 </h2>
+    <table class="table table-striped">
+        {% for sku in objs %}
+            <tr><td>
+                {% include "sku_template.html" with sku=sku %}
+            </td></tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p> 没有相对应的结果  </p>
+    {% endif %}
+
+{% endblock %}

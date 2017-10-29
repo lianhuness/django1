@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    合同: {{ contract }} </t> 进账
+</h1>
+    <table class="table">
+        <tr>
+            <th> 日期 </th>
+            <th> 账户 </th>
+            <th> 金额</th>
+            <th> 单位 </th>
+            <th> 操作</th>
+        </tr>
+
+        {% for ci in contract.contractincome_set.all %}
+        <tr>
+            <td> {{ ci.created_date }}</td>
+            <td> {{ ci.source }}</td>
+            <td> {{ ci.amount }}</td>
+            <td> {{ ci.currency }}</td>
+            <td> <a href="{% url 'delete_income' id=ci.id %}"> 删除</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2> 总共： {{ contract.income }}({{ contract.currency }})</h2>
+
+{% endblock %}

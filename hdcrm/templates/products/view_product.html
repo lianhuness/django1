@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+    <h1>
+        {{ product.get_type_display }} - {{ product.name }}
+    </h1>
+
+    <ul>
+        <li> <a href="{% url 'edit_product' id=product.id %}"> 修改产品信息 </a></li>
+    </ul>
+
+    <div class="text-center">
+        <h2>物料详情 </h2>
+        <table class="table">
+            {%  for kv in product.kvs %}
+                <tr>
+                    <th> {{ kv.0 }}</th>
+                    <td> {{ kv.1 }}</td>
+                </tr>
+            {%  endfor %}
+        </table>
+
+    </div>
+
+{% endblock %}

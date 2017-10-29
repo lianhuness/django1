@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+     SKU: {{ sku }}
+</h1>
+
+
+    <div>
+        <ul>
+            <li> 客户： {{ sku.client }}</li>
+            <li> 建议零售价 {{ sku.currency }}{{ sku.suggested_price }}</li>
+        </ul>
+
+        <ul>
+            <li>
+                <a href="{% url "edit_sku" id=sku.id %}"> 修改信息</a>
+            </li>
+
+            <li>
+                <a href="{% url 'add_skuitem' sid=sku.pk %}"> 添加物料</a>
+            </li>
+        </ul>
+    </div>
+
+
+        <h2> 物料清单 </h2>
+        <table class="table table-striped">
+                {% for si in sku.skuitem_set.all %}
+                    <tr>
+                        <td>
+                            <h3> {{ si }}</h3>
+                            <ul>
+                                {% for kv in si.product.getProduct.kvs  %}
+                                    <li> {{ kv.0 }}: {{ kv.1 }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="{% url 'del_skuitem' id=si.id %}"> 删除</a>
+                        </td>
+                    </tr>
+                {%  endfor %}
+
+        </table>
+
+
+{% endblock %}

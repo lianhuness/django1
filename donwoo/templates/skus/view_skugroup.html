@@ -1,0 +1,26 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    产品类别: {{ sg }}
+</h1>
+    <ul>
+        <li> <a href="{% url 'edit_skugroup' pk=sg.id %}"> 修改 </a></li>
+        <li> <a href="{% url 'del_skugroup' pk=sg.id %}"> 删除 </a></li>
+        <li> <a href="{% url 'dw_add_sku_sg' sg=sg.id %}"> 添加SKU  </a></li>
+    </ul>
+
+    <table class="table table-striped">
+        {% for sku in sg.sku_set.all %}
+        <tr>
+            <td>
+                {% include "sku_template.html" with sku=sku %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

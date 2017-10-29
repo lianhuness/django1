@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+<h1>
+     查看合同编号: {{ contract.id }}
+</h1>
+
+    <table class="table">
+        <tr>
+            <th> 销售员 </th> <td> {{ contract.sales }}</td>
+        </tr>
+
+        <tr>
+            <th> 客户 </th> <td> {{ contract.client }}</td>
+        </tr>
+         <tr>
+             <th> 金额 </th> <td> {{ contract.amount }} {{ contract.currency }}</td>
+        </tr>
+         <tr>
+             <th> 交货日期 </th> <td> {{ contract.deliveryDate }}</td>
+        </tr>
+        <tr>
+            <th> 合同文件 </th>
+            <td>
+                {%  if contract.hetong %}
+                    <a href="{{contract.hetong.url  }}">{{  contract.hetong.name }} </a>
+                {% else %}
+                    None
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th> 收款金额 </th>
+            <td>
+                {% if contract.income %}
+                    <a href="{% url 'view_incomes' cid=contract.id %}"> {{ contract.income }} </a>
+                {% endif %}
+                <a href="{% url 'add_income' cid=contract.id %}"> 添加 </a></li>
+            </td>
+        </tr>
+
+        <tr>
+            <th> 付款金额 </th>
+            <td>
+                {% if contract.expense %}
+                    <a href="{% url 'view_expenses' cid=contract.id %}"> {{ contract.expense }} </a>
+                {% endif %}
+                <a href="{% url 'add_expense' cid=contract.id %}"> 添加 </a></li>
+            </td>
+        </tr>
+    </table>
+
+
+    <ul>
+        <li><a href="{%  url 'edit_contract' id=contract.id %}">修改合同</a>  </li>
+        <li><a href="{%  url 'add_contractsku' id=contract.id %}"> 添加产品及价格  </a> </li>
+    </ul>
+
+    <h2> 包含产品 </h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+           <th> ID </th>
+            <th> SKU </th>
+            <th> 数量</th>
+            <th> 单价 ({{ contract.currency }})</th>
+            <th> 金额 ({{ contract.currency }}) </th>
+            <th> 操作 </th>
+        </tr>
+         {% for cs in contract.contractsku_set.all %}
+            <tr>
+                <td> {{ cs.id }}</td>
+                <td> {{ cs.sku }}</td>
+                <td> {{  cs.qty }}</td>
+                <td> {{  cs.unitcost }}</td>
+                <td> {{  cs.total }}</td>
+                <td>
+                    <a href="{% url 'delete_contractsku' id=cs.id %}"> 删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> Sum </td>
+            <td> {{ contract.total  }}</td>
+            <td></td>
+        </tr>
+    </table>
+{% endblock %}

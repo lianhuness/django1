@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    {{ sku }}
+</h1>
+
+     <table>
+
+     </table>
+
+    <h2> 添加产品 </h2>
+
+     <form action="{% url 'add_skuitem' sid=sku.pk %}" method="POST">
+        {% csrf_token %}
+         <table class="table">
+            {{ form.as_table }}
+              </table>
+     <input type="submit" value="Submit" />
+     </form>
+
+
+
+{% endblock %}

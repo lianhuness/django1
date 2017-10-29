@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>我的客户列表</h1>
+    <table class="table">
+        <tr>
+            <th> 名称</th>
+            <th> 国家</th>
+            <th> 地区 </th>
+            <th> 销售代表 </th>
+            <th> SKU 数量 </th>
+        </tr>
+        {% for client in clients %}
+            <tr>
+                <td> <a href={% url 'view_client' id=client.id %}> {{ client.name }} </a> </td>
+                <td>{{ client.country }}</td>
+                <td>{{ client.district }}</td>
+                <td> {{  client.sales }}</td>
+                <td> {{  client.sku_set.all.count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

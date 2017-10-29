@@ -1,0 +1,19 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+     添加新的产品
+</h1>
+
+    <form action="{% url 'dw_add_sku' %}" method="POST">
+        <table class="table">
+            {% csrf_token %}
+            {{ form.as_table}}
+        </table>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

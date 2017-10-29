@@ -1,0 +1,19 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+     修改 {{ sg }}
+</h1>
+
+    <form action="{% url 'dw_edit_sku' pk=sg.id %}" method="POST">
+        <table class="table">
+            {% csrf_token %}
+            {{ form.as_table}}
+        </table>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

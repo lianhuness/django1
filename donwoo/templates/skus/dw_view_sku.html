@@ -1,0 +1,65 @@
+{% extends "donwoo_base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<h1>
+    产品: {{ sg }}
+</h1>
+    <ul>
+        <li> <a href="{% url 'dw_edit_sku' pk=sg.id %}"> 修改 </a></li>
+        <li> <a href="{% url 'dw_delete_sku' pk=sg.id %}"> 删除 </a></li>
+{#        <li> <a href="{% url 'dw_add_skuimage' pk=sg.id %}"> 添加图片 </a></li>#}
+    <li> <a href="{% url 'dw_add_skufile' pk=sg.id %}"> 添加文件 </a></li>
+    <li> <a href="{% url 'dw_add_skuquote' pk=sg.id %}"> 添加报价 </a></li>
+    </ul>
+
+
+    <h2> 产品类别</h2>
+        <p>{{ sg.skuGroup }} </p>
+
+    <h2> 描述 </h2>
+        <p> {{ sg.description|linebreaks }}</p>
+
+    <h2> 文件附件  </h2>
+    <table class="table">
+        {% for f in sg.skufile_set.all %}
+            <tr>
+                <td>
+                    {{ f.created_date }}
+                </td>
+                <td>
+                    {{ f }} - <a href="{% url 'dw_delete_skufile' pk=f.id %}"> 删除</a>
+                </td>
+                <td>
+                    {{ f.filetype }}
+                </td>
+                <td>
+                    <a href="{{ f.file.url }}">
+                        {% if f.isImage %}
+                            <img height=100 src="{{ f.file.url }}" />
+                        {%  else %}
+                            {{ f.filename }}
+                        {% endif %}
+                    </a>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2> 产品报价  </h2>
+    <table class="table">
+        {% for f in sg.skuquote_set.all %}
+            <tr>
+                <td> {{ f.created_date }}</td>
+                <td> {{ f.specs }}</td>
+                <td> {{  f.price }} USD </td>
+                <td> <a href="{% url 'dw_delete_skuquote' pk=f.id %}"> 删除</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

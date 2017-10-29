@@ -99,3 +99,16 @@ ENV/
 
 # mypy
 .mypy_cache/
+*.sqlite3
+*.iml
+*.xml
+.idea/dataSources/8b7f96d1-eee4-4eb7-8ea6-a402c10b49f9/_metadata_/metadata
+*.keystream
+*.len
+*.at
+.idea/dataSources/8b7f96d1-eee4-4eb7-8ea6-a402c10b49f9/_metadata_/metadata_i
+.idea/dataSources/98f5520c-6ce5-4980-87aa-597bb7fe331f/_metadata_/metadata
+.idea/dataSources/98f5520c-6ce5-4980-87aa-597bb7fe331f/_metadata_/metadata_i
+
+.idea
+media

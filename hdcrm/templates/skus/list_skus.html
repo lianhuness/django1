@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<!-- 标题-->
+{% endblock %}
+
+{% block content %}
+
+<h1>
+     所有的SKU
+</h1>
+
+    <table class="table">
+        <tr>
+            <th> SKU 昵称</th>
+            <th> 客户 </th>
+            <th> 包含产品数 </th>
+            <th> 创立日期 </th>
+        </tr>
+
+        {% for sku in skus %}
+            <tr>
+               <td> <a href="{% url 'view_sku' id=sku.id %}" > {{ sku }}  </a></td>
+                <td> {{ sku.client }}</td>
+                <td> {{ sku.skuitem_set.count }}</td>
+                <td> {{ sku.created_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
